@@ -35,8 +35,7 @@ var userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
       },
-        summary: [String],
-        quantity: Number,
+        items: [String],
         shipping: Number,
         taxes: Number,
         grandTotal: Number

@@ -20,7 +20,7 @@ var userSchema = new mongoose.Schema({
   phoneNumber: Number,
   address: {
     street: String,
-    Apt: String,
+    apt: String,
     zipCode: Number,
     state: String,
     country: String

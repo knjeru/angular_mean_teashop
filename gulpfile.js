@@ -24,7 +24,8 @@ var neat = require('bourbon-neat').includePaths;
 
 var paths = {
   styles: [
-    './src/client/css/*.css',
+    './src/client/styles/css/*.css',
+    './src/client/styles/scss/*.scss',
   ],
   scripts: [
     './src/client/js/*.js',
@@ -97,19 +98,18 @@ gulp.task('minify-css', function() {
   var opts = {keepSpecialComments:'*'};
   return gulp.src(paths.styles)
     .pipe(cleanCSS(opts))
-    .pipe(gulp.dest('./dist/client/css/'));
+    .pipe(gulp.dest('./dist/client/styles/css/'));
 });
 
 gulp.task('sass', function() {
   return gulp.src(paths.styles)
     .pipe(sass({
-      includePaths: bourbon,
       includePaths: neat
     }))
-    .pipe(gulp.dest('./dist/client/css/'))
+    .pipe(gulp.dest('./dist/client/styles/scss/'))
     .pipe(browserSync.reload({
       stream: true
-    }))
+    }));
 });
 
 gulp.task('minify-js', function() {

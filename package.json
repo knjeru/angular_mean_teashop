@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./src/server/bin/www"
+    "start": "node ./src/server/bin/www",
+    "sass": "node-sass --include-path node_modules/bourbon/app/assets/stylesheets -o build/css/ scss/"
   },
   "dependencies": {
     "bcrypt": "^0.8.5",

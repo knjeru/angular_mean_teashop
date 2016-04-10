@@ -16,7 +16,7 @@
         .state('home', {
           url: '/',
           templateUrl: '/app/home/views/home.html',
-          controller: 'CatalogCtrl',
+          controller: 'HomeCtrl',
           controllerAs: 'vm'
         })
         .state('register', {

@@ -10,4 +10,4 @@ Visit this fine online tea establishment, and order a few of the rarest digital 
 * SASS (Bourbon-neat)
 
 ### Pivotal Tracker
-[Pivotal Tracker Stories](https://www.pivotaltracker.com/n/projects/1571559)
+* [Pivotal Tracker Stories](https://www.pivotaltracker.com/n/projects/1571559)

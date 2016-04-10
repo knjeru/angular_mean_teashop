@@ -2,7 +2,7 @@
 
 Visit this fine online tea establishment, and order a few of the rarest digital tea bags this side of the "Amazon"!
 
-Technologies Used:
+### Technologies Used:
 * Mongo/Mongoose
 * Express
 * AngularJS

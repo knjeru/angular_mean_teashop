@@ -23,7 +23,14 @@ router.post('/', function(req,res,next) {
     userName: req.body.userName,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    email: req.body.email
+    email: req.body.email,
+    address: {
+      street: req.body.street,
+      apt: req.body.apt,
+      zipCode: req.body.zipcode,
+      state: req.body.state,
+      country: req.body.country
+    }
   })
   .saveQ()
   .then(function(user) {
@@ -58,6 +65,13 @@ router.put('/:id/edit', function(req,res,next) {
     user.firstName = req.body.firstName;
     user.lastName = req.body.lastName;
     user.email = req.body.email;
+    user.address = {
+          street: req.body.street,
+          apt: req.body.apt,
+          zipCode: req.body.zipcode,
+          state: req.body.state,
+          country: req.body.country
+        };
     user
       .saveQ()
       .then(function(userUpdated) {
@@ -101,11 +115,11 @@ router.delete('/:id/cart/delete', function(req,res,next) {
     {
       $pull: {
         "cart": {
-          _id: req.body.id
+          itemID: req.body.itemID
         }
       }
     },
-    {multi: true},
+    {multi: false},
     function(err, user) {
       if (err) {
         res.json({

@@ -10,7 +10,10 @@ router.get('/', function(req,res,next) {
     res.json(data);
   })
   .catch(function(err) {
-    res.json(err);
+    res.json({
+      status: 500,
+      message: err
+    });
   });
 });
 
@@ -27,7 +30,10 @@ router.post('/', function(req,res,next) {
     res.json(user);
   })
   .catch(function(err) {
-    console.log(err);
+    res.json({
+      status: 500,
+      message: err
+    });
   });
 });
 
@@ -38,7 +44,10 @@ router.get('/:id', function(req,res,next) {
     res.json(user);
   })
   .catch(function(err) {
-    console.log(err);
+    res.json({
+      status: 500,
+      message: err
+    });
   });
 });
 
@@ -55,19 +64,31 @@ router.put('/:id/edit', function(req,res,next) {
         res.json(userUpdated);
       })
       .catch(function(err) {
-        console.log(err);
+        res.json({
+          status: 500,
+          message: err
+        });
       });
   });
 });
 
-/* Post item to user's cart */
+/* Add new item to user's cart */
 router.post('/:id/cart/new', function(req,res,next) {
   User.findByIdAndUpdate(req.params.id,
-    {$push: {"cart": {itemID: req.body.itemID}}},
+    {
+      $push: {
+        "cart": {
+          itemID: req.body.itemID
+        }
+      }
+    },
     {safe: true, upsert: true, new: true},
     function(err, user) {
       if (err) {
-          res.send('Error happened');
+        res.json({
+          status: 500,
+          message: err
+        });
       } else {
           res.json(user);
       }
@@ -77,11 +98,20 @@ router.post('/:id/cart/new', function(req,res,next) {
 /* Delete item from user's cart */
 router.delete('/:id/cart/delete', function(req,res,next) {
   User.findByIdAndUpdate(req.params.id,
-    {$pull: {"cart": {_id: req.body.id}}},
+    {
+      $pull: {
+        "cart": {
+          _id: req.body.id
+        }
+      }
+    },
     {multi: true},
     function(err, user) {
       if (err) {
-          res.send('Error happened');
+        res.json({
+          status: 500,
+          message: err
+        });
       } else {
           res.json(user);
       }
@@ -90,15 +120,11 @@ router.delete('/:id/cart/delete', function(req,res,next) {
 
 /* Post order to user history */
 router.post('/:id/order/new', function(req,res,next) {
-  // First we'll set the cart to an orderplaced value
-
-
-  // Then push that new order into the order array
   User.findByIdAndUpdate(req.params.id,
     {
       $push: {
           order: {
-            summary: [req.body.cart],
+            summary: req.body.cart,
             taxes: req.body.taxes,
             shipping: req.body.shipping,
             grandTotal: req.body.total
@@ -108,7 +134,10 @@ router.post('/:id/order/new', function(req,res,next) {
     {safe: true, upsert: true, new: true},
     function(err, user) {
       if (err) {
-          res.send('Error happened');
+        res.json({
+          status: 500,
+          message: err
+        });
       } else {
           res.json(user);
       }
@@ -122,7 +151,10 @@ router.delete('/:id/delete', function(req,res,next) {
     res.json('Peace out!');
   })
   .catch(function(err) {
-    res.json('I dont get it. Does this mean that you are staying?');
+    res.json({
+      status: 500,
+      message: err
+    });
   });
 });
 

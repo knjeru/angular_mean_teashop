@@ -123,15 +123,38 @@ router.post('/:id/order/new', function(req,res,next) {
   User.findByIdAndUpdate(req.params.id,
     {
       $push: {
-          order: {
-            summary: req.body.cart,
-            taxes: req.body.taxes,
-            shipping: req.body.shipping,
-            grandTotal: req.body.total
-          }
+        order: {
+          items: req.body.items,
+          taxes: req.body.taxes,
+          shipping: req.body.shipping,
+          grandTotal: req.body.total
         }
+      }
     },
     {safe: true, upsert: true, new: true},
+    function(err, user) {
+      if (err) {
+        res.json({
+          status: 500,
+          message: err
+        });
+      } else {
+          res.json(user);
+      }
+    });
+});
+
+/* Pull all items from cart array when user confirms order */
+router.post('/:id/order/confirm', function(req,res,next) {
+  User.findByIdAndUpdate(req.params.id,
+    {
+      $pull: {
+        cart: {
+          orderPlaced: req.body.order
+        }
+      }
+    },
+    {multi: true},
     function(err, user) {
       if (err) {
         res.json({
@@ -148,7 +171,10 @@ router.post('/:id/order/new', function(req,res,next) {
 router.delete('/:id/delete', function(req,res,next) {
   User.findByIdAndRemoveQ(req.params.id)
   .then(function(data) {
-    res.json('Peace out!');
+    res.json({
+      status: 200,
+      message: 'User Removed'
+    });
   })
   .catch(function(err) {
     res.json({

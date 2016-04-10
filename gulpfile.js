@@ -14,18 +14,23 @@ var clean = require('gulp-rimraf');
 var concat = require('gulp-concat');
 var runSequence = require('run-sequence');
 var sass = require('gulp-sass');
-var bourbon = require('bourbon').includePaths;
-var neat = require('bourbon-neat').includePaths;
+var settings = {
+    settings: {
+      indentedSyntax: true, // Enable .sass syntax!
+      includePaths: require('node-bourbon').includePaths,
+      includePaths: require('node-neat').includePaths
+    }
+  };
 
 
-/**
- * Config
- */
+/* Config */
 
 var paths = {
+  sass: [
+    './src/client/styles/scss/*.scss',
+  ],
   styles: [
     './src/client/styles/css/*.css',
-    './src/client/styles/scss/*.scss',
   ],
   scripts: [
     './src/client/js/*.js',
@@ -37,6 +42,8 @@ var paths = {
     './dist/server/bin/www'
   ]
 };
+
+// console.log("Bourbon/Neat Paths:", [paths.sass].concat(neat));
 
 var nodemonConfig = {
   script: paths.server,
@@ -51,9 +58,7 @@ var nodemonDistConfig = {
 };
 
 
-/**
- * Gulp Tasks
- */
+/* Gulp Tasks */
 
 gulp.task('lint', function() {
   return gulp.src(paths.scripts)
@@ -63,7 +68,7 @@ gulp.task('lint', function() {
 
 gulp.task('browser-sync', ['nodemon'], function(done) {
   browserSync({
-    proxy: "localhost:3000/#/",  // local node app address
+    proxy: "localhost:3000",  // local node app address
     port: 5000,  // use *different* port than above
     notify: true
   }, done);
@@ -101,12 +106,10 @@ gulp.task('minify-css', function() {
     .pipe(gulp.dest('./dist/client/styles/css/'));
 });
 
-gulp.task('sass', function() {
-  return gulp.src(paths.styles)
-    .pipe(sass({
-      includePaths: neat
-    }))
-    .pipe(gulp.dest('./dist/client/styles/scss/'))
+gulp.task('sass', function () {
+  return gulp.src(paths.sass)
+    .pipe(sass(settings))
+    .pipe(gulp.dest(paths.styles))
     .pipe(browserSync.reload({
       stream: true
     }));

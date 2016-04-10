@@ -8,6 +8,7 @@ Visit this fine online tea establishment, and order a few of the rarest digital 
 * AngularJS
 * Node.js
 * SASS (Bourbon-neat)
+* JSON Web Tokens (Authorization)
 
 ### Pivotal Tracker
 * [Pivotal Tracker Stories](https://www.pivotaltracker.com/n/projects/1571559)

@@ -17,9 +17,17 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  phoneNumber: Number,
+  address: {
+    street: String,
+    Apt: String,
+    zipCode: Number,
+    state: String,
+    country: String
+  },
   cart: [
     {
-      itemID: String,
+      itemID: [String],
       timestamp: {
         type: Date, default: Date.now
       },
@@ -35,7 +43,7 @@ var userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
       },
-        items: [String],
+        cart: [String],
         shipping: Number,
         taxes: Number,
         grandTotal: Number

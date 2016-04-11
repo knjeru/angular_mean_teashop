@@ -10,7 +10,7 @@
 
   function catalogApiService ($http) {
 
-    var urlBase = '/';
+    var urlBase = '/catalog';
     var catalogAPI = {};
 
     catalogAPI.getAllItems = function() {

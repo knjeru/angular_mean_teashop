@@ -62,7 +62,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.get('/', function(req,res,next) {
     res.sendFile(path.join(__dirname, '../client/app', 'index.html'));
 });
-app.use('/', catalogApi);
+app.use('/catalog', catalogApi);
 app.use('/auth', authorization);
 app.use('/api', protectApi);
 app.use('/api/users', userApi);

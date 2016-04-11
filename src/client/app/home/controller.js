@@ -6,24 +6,31 @@
     .module('teaApp')
     .controller('HomeCtrl', HomeCtrl);
 
-    HomeCtrl.$inject = ['$stateParams', '$location', 'catalogApiService', 'userApiService'];
+    HomeCtrl.$inject = ['$stateParams', '$location', 'catalogApiService', 'userApiService', '$localStorage'];
 
-    function HomeCtrl ($stateParams, $location, catalogApiService, userApiService) {
+    function HomeCtrl ($stateParams, $location, catalogApiService, userApiService, $localStorage) {
       var vm = this;
-      vm.cartItem = {};
+      var id = $localStorage.val;
+      vm.sort = false;
+      vm.category;
+      vm.name;
 
       catalogApiService.getAllItems()
       .success(function(data) {
-        console.log(data[0]);
         vm.catalog = data;
       });
 
       // Add item to user cart
-      vm.addItem = function(id, body) {
-        userApiService.addToCart(vm.cartItem)
-        .success(function(data) {
-          console.log(data);
-        });
+      vm.addItem = function(item, quantity) {
+        vm.cartItem = [];
+        for (var i = 0; i < quantity; i++) {
+          vm.cartItem.push(item);
+        }
+        console.log(id, vm.cartItem);
+        // userApiService.addToCart(id, vm.cartItem)
+        // .success(function(data) {
+        //   console.log(data);
+        // });
       };
 
       vm.addQuantity =
@@ -49,8 +56,6 @@
         {"category": "awesome"},
         {"category": "cold"},
         {"category": "dark"}];
-
-      vm.sort = false;
 
       vm.sortPrice =
       [{

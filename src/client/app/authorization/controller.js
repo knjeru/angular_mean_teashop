@@ -15,8 +15,9 @@
 
     function LoginCtrl ($rootScope, $location, $localStorage, Auth) {
       function successAuth(res) {
+            $localStorage.val = res.id;
             $localStorage.token = res.token;
-            $location.url(res.id + '/home');
+            $location.url('/');
         }
 
         var vm = this;
@@ -47,6 +48,7 @@
         };
 
         vm.logout = function () {
+          $localStorage.id = null;
           Auth.logout(function () {
               $location.url('/');
           });

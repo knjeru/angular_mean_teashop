@@ -6,11 +6,15 @@
     .module('teaApp')
     .factory('userApiService', userApiService);
 
-  userApiService.$inject = ['$http'];
+  userApiService.$inject = ['$http', '$localStorage'];
 
-  function userApiService ($http) {
+  function userApiService ($http, $localStorage) {
     var urlBase = '/api/user';
     var userApi = {};
+
+    userApi.getLoggedUser = function() {
+      return $localStorage.val;
+    };
 
     userApi.getUser = function(id) {
       return $http.post(urlBase + '/' + id);

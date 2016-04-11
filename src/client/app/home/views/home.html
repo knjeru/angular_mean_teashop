@@ -1,15 +1,17 @@
-<div class="container">
+<div class="row">
   <h2>Welcome To Mean Tea!</h2>
   <div class="row sortoptions">
-    <div class="three columns">
+    <div class="seven columns">
       <span>Search By Category</span>
       <select
           ng-model="category"
           ng-options="value.category as value.category for value in vm.category">
           <option>--</option>
       </select>
+      <span>Search By Name</span>
+      <input ng-model="name" type="text">
     </div>
-    <div class="seven columns">
+    <div class="four columns">
       <button type="button" class="btn checkoutbag">Checkout | {{cart}}</button>
     </div>
   </div>
@@ -27,15 +29,15 @@
       </select>
     </div>
   </div>
-  <div class="catalog" ng-repeat="item in vm.catalog | orderBy:sort">
+  <div class="catalog" ng-repeat="item in vm.catalog | filter:category| filter:name | orderBy:sort">
     <div class="row">
       <div class="two columns photo">
         <img ng-src="{{item.imageUrl}}" alt="" />
       </div>
-      <div class="ten columns">
-        <div class="details four columns">
+      <div class="details nine columns">
+        <div class="four columns">
           <h3><strong>{{item.name}}</strong></3>
-          <p><strong>Price:</strong>  {{item.price}}</p>
+          <p><strong>Price:</strong>  {{item.price | currency:$:0}}</p>
           <p><strong>Caffeine Scale:</strong>  {{item.caffeineScale}}</p>
           <p><strong>Ingredients:</strong>  {{item.ingredients[0]}}</p>
           <p><strong>Rating:</strong>  {{item.rating}}</p>
@@ -46,13 +48,15 @@
               <li ng-repeat="category in item.categories">{{category}}</li>
             </ul>
         </div>
-        <span>Quantity</span>
-        <select
-            ng-model="quantity"
-            ng-options="value.value as value.value for value in vm.addQuantity">
-            <option>--</option>
-        </select>
-        <button type="button" class="btn addbag">Add to Bag</button>
+        <div class="four columns">
+          <span>Quantity</span>
+          <select
+              ng-model="quantity"
+              ng-options="value.value as value.value for value in vm.addQuantity">
+              <option>--</option>
+          </select>
+          <button ng-click="vm.addItem(item._id, quantity)" type="button" class="btn addbag">Add to Bag</button>
+        </div>
       </div>
     </div>
   </div>

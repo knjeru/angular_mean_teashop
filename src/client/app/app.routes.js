@@ -19,12 +19,6 @@
           controller: 'HomeCtrl',
           controllerAs: 'vm'
         })
-        .state('userHome', {
-          url: '/:id/home',
-          templateUrl: '/app/home/views/home.html',
-          controller: 'HomeCtrl',
-          controllerAs: 'vm'
-        })
         .state('register', {
           url: '/register',
           templateUrl: '/app/authorization/views/register.html',

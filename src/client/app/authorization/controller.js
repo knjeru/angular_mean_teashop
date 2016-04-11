@@ -15,6 +15,7 @@
 
     function LoginCtrl ($rootScope, $location, $localStorage, Auth) {
       function successAuth(res) {
+            console.log(res);
             $localStorage.token = res.token;
             $location.url(res.id + '/home');
         }
@@ -32,8 +33,11 @@
           });
         };
 
-        vm.signup = function () {
+        vm.register = function () {
           var formData = {
+              userName: vm.userName,
+              firstName: vm.firstName,
+              lastName: vm.lastName,
               email: vm.email,
               password: vm.password
           };
@@ -41,6 +45,8 @@
           Auth.signup(formData, successAuth, function () {
               $rootScope.error = 'Failed to signup';
           });
+
+          // $location.url('/login');
         };
 
         vm.logout = function () {

@@ -20,10 +20,10 @@ router.post('/register', function(req, res, next) {
   // check if email is unique
   User.findOne({ email: req.body.email })
     .then(function(data){
+      console.log(email);
       // if email is in the database send an error
       if(data) {
-          res.json('Email already exist!');
-          return res.redirect('/register');
+          res.json(data);
       } else {
         // hash and salt the password
         var hashedPassword = hashing(password);
@@ -43,8 +43,17 @@ router.post('/register', function(req, res, next) {
           }
         })
         .saveQ()
-        .then(function(data) {
-          res.json('Welcome!');
+        .then(function(user) {
+
+          var token = jwt.sign(user, 'superSecret', {
+            expiresIn: "10h" // expires in 10 hours;
+          });
+
+          res.json({
+            message: 'Welcome',
+            id: user.id,
+            token: token
+          });
         })
         .catch(function(err) {
           return res.json('crap');

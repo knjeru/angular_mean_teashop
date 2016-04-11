@@ -3,7 +3,11 @@ body {
   color: #333; }
 
 h2 {
-  color: #FB7F5B; }
+  color: #FB7F5B;
+  text-align: center;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 3rem; }
 
 nav {
   border: 1px solid black;

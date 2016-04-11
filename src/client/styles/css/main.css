@@ -9,6 +9,22 @@ h2 {
   margin: auto;
   margin-bottom: 3rem; }
 
+.head, .catalog {
+  border: 1px solid black; }
+
+.photo {
+  float: left; }
+
+.details {
+  float: right; }
+
+.checkoutbag {
+  background-color: #E26D5F;
+  float: right; }
+
+.addbag {
+  background-color: #F5B965; }
+
 nav {
   border: 1px solid black;
   border-radius: 5px;

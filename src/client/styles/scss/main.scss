@@ -5,3 +5,28 @@ body {
   font: 100% $font-stack;
   color: $primary-color;
 }
+
+h2 {
+  color: #FB7F5B;
+  text-align: center;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 3rem;
+}
+
+nav {
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 50px;
+  width: auto;
+  background-color: rgb(245, 237, 233);
+  text-align: center;
+  font-size: 1.5rem;
+  ul {
+    list-style-type: none;
+  }
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}

@@ -35,6 +35,7 @@
     userApi.confirmOrder = function(id, body) {
       return $http.post(urlBase + '/' + id + '/order/confirm', body);
     };
-  }
 
+    return userApi;
+  }
 })();

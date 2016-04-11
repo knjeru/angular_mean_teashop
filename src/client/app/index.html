@@ -12,6 +12,17 @@
     <link rel="stylesheet" ng-href="{{css}}">
   </head>
   <body>
+    <header>
+      <nav class="twelve columns navigation">
+        <ul class="main-navigation" role="navigation">
+          <li class="two columns"><a ui-sref="home">Home</a></li>
+          <li class="two columns"><a href="#/about">About</a></li>
+          <li class="two columns"><a href="#/contact">Contact</a></li>
+          <li class="two columns"><a ui-sref="login">Sign In</a></li>
+          <li class="two columns"><a class="btn" ui-sref="register">Sign Up Now</a></li>
+        </ul>
+      </nav>
+    </header>
     <div ui-view>
 
       <!-- Partials here -->

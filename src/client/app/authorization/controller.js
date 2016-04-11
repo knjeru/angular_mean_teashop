@@ -32,8 +32,11 @@
           });
         };
 
-        vm.signup = function () {
+        vm.register = function () {
           var formData = {
+              userName: vm.userName,
+              firstName: vm.firstName,
+              lastName: vm.lastName,
               email: vm.email,
               password: vm.password
           };

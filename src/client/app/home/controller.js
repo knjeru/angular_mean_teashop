@@ -6,9 +6,9 @@
     .module('teaApp')
     .controller('HomeCtrl', HomeCtrl);
 
-    HomeCtrl.$inject = ['$stateParams', '$location', 'catalogApiService'];
+    HomeCtrl.$inject = ['$stateParams', '$location', 'catalogApiService', 'userApiService'];
 
-    function HomeCtrl ($stateParams, $location, catalogApiService) {
+    function HomeCtrl ($stateParams, $location, catalogApiService, userApiService) {
       var vm = this;
       vm.cartItem = {};
 
@@ -19,7 +19,10 @@
 
       // Add item to user cart
       vm.addItem = function(id, body) {
-
+        userApiService.addToCart(vm.cartItem)
+        .success(function(data) {
+          console.log(data);
+        });
       };
     }
 })();

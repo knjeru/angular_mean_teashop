@@ -5,7 +5,8 @@
   angular
     .module('teaApp', [
       'ui.router',
-      'door3.css'
+      'door3.css',
+      'ngStorage'
     ]);
 
 })();

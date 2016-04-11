@@ -7,12 +7,45 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
-
+var protectApi = express.Router();
+var config = require('./config');
 
 // *** routes *** //
 var userApi = require('./routes/userApi.js');
 var catalogApi = require('./routes/catalogApi.js');
+var authorization = require('./routes/authorization.js');
 
+// *** JSON Web Token Validation *** //
+protectApi.use(function(req, res, next) {
+
+  // check header or url parameters or post parameters for token
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  // decode token
+  if (token) {
+
+    // verifies secret and checks exp
+    jwt.verify(token, config.token, function(err, decoded) {
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
+      } else {
+        // if everything is good, save to request for use in other routes
+        req.decoded = decoded;
+        next();
+      }
+    });
+
+  } else {
+
+    // if there is no token
+    // return an error
+    return res.status(403).send({
+        success: false,
+        message: 'No token provided.'
+    });
+
+  }
+});
 
 // *** express instance *** //
 var app = express();
@@ -29,8 +62,10 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.get('/', function(req,res,next) {
     res.sendFile(path.join(__dirname, '../client/app', 'index.html'));
 });
-app.use('/api/user', userApi);
-app.use('/api/catalog', catalogApi);
+app.use('/', catalogApi);
+app.use('/auth', authorization);
+app.use('/api', protectApi);
+app.use('/api/users', userApi);
 
 
 // catch 404 and forward to error handler

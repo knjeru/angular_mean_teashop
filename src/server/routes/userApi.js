@@ -17,33 +17,6 @@ router.get('/', function(req,res,next) {
   });
 });
 
-/* Add New User */
-router.post('/', function(req,res,next) {
-  new User({
-    userName: req.body.userName,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    address: {
-      street: req.body.street,
-      apt: req.body.apt,
-      zipCode: req.body.zipcode,
-      state: req.body.state,
-      country: req.body.country
-    }
-  })
-  .saveQ()
-  .then(function(user) {
-    res.json(user);
-  })
-  .catch(function(err) {
-    res.json({
-      status: 500,
-      message: err
-    });
-  });
-});
-
 /* Get user by ID */
 router.get('/:id', function(req,res,next) {
   User.findByIdQ(req.params.id)

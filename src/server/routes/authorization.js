@@ -20,7 +20,6 @@ router.post('/register', function(req, res, next) {
   // check if email is unique
   User.findOne({ email: req.body.email })
     .then(function(data){
-      console.log(email);
       // if email is in the database send an error
       if(data) {
           res.json(data);
@@ -93,7 +92,6 @@ router.post('/login', function(req, res, next) {
         }
       })
       .catch(function(err) {
-        console.log(err);
         // issue with database query
         return res.send('Incorrect email and/or password.');
       });

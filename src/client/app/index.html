@@ -12,6 +12,16 @@
     <link rel="stylesheet" ng-href="{{css}}">
   </head>
   <body>
+    <nav class="navigation">
+      <a href="#" class="menu-icon">
+        <i class="fa fa-bars"></i>
+      </a>
+      <ul class="main-navigation" role="navigation">
+        <li><a ui-sref="home">Home</a></li>
+        <li><a href="#/about">About</a></li>
+        <li><a href="#/contact">Contact</a></li>
+      </ul>
+    </nav>
     <div ui-view>
 
       <!-- Partials here -->

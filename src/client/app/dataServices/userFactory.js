@@ -12,10 +12,6 @@
     var urlBase = '/api/user';
     var userApi = {};
 
-    userApi.getLoggedUser = function() {
-      return $localStorage.val;
-    };
-
     userApi.getUser = function(id) {
       return $http.post(urlBase + '/' + id);
     };

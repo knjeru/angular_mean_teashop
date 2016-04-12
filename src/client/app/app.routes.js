@@ -58,6 +58,7 @@
 
         $httpProvider
           .interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
+
             return {
                 'request': function (config) {
                     config.headers = config.headers || {};

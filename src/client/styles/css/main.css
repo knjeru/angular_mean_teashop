@@ -19,12 +19,15 @@ h2 {
 .details {
   float: right; }
 
-.checkoutbag {
-  background-color: #E26D5F;
+.cartbtns {
   float: right; }
+  .cartbtns .checkoutbag {
+    background-color: #E26D5F; }
+  .cartbtns .clearbag {
+    background-color: #F5B965; }
 
 .addbag {
-  background-color: #F5B965; }
+  background-color: #45d633; }
 
 nav {
   border: 1px solid black;

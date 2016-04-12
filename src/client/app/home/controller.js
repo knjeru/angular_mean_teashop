@@ -10,27 +10,34 @@
 
     function HomeCtrl ($stateParams, $location, catalogApiService, userApiService, $localStorage) {
       var vm = this;
-      var id = $localStorage.val;
+      vm.cartStatus = false;
       vm.sort = false;
       vm.category;
       vm.name;
+
+      if ($localStorage.cart.length > 0) {
+        vm.cartStatus = true;
+      } else {
+        $localStorage.cart = [];
+        vm.cartStatus = false;
+      }
 
       catalogApiService.getAllItems()
       .success(function(data) {
         vm.catalog = data;
       });
 
-      // Add item to user cart
+      // Add item to user localStorage cart
       vm.addItem = function(item, quantity) {
-        vm.cartItem = [];
         for (var i = 0; i < quantity; i++) {
-          vm.cartItem.push(item);
+          $localStorage.cart.push(item);
         }
-        console.log(id, vm.cartItem);
-        // userApiService.addToCart(id, vm.cartItem)
-        // .success(function(data) {
-        //   console.log(data);
-        // });
+        vm.cartStatus = true;
+      };
+
+      vm.clearCart = function() {
+        $localStorage.cart = [];
+        vm.cartStatus = false;
       };
 
       vm.addQuantity =

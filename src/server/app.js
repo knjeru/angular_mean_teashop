@@ -21,7 +21,7 @@ protectApi.use(function(req, res, next) {
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
-  // decode token
+  // If request includes a token check to see if its valid
   if (token) {
 
     // verifies secret and checks exp
@@ -29,7 +29,7 @@ protectApi.use(function(req, res, next) {
       if (err) {
         return res.json({ success: false, message: 'Failed to authenticate token.' });
       } else {
-        // if everything is good, save to request for use in other routes
+        // if everything is good call the next middleware for the route
         req.decoded = decoded;
         next();
       }
@@ -38,7 +38,7 @@ protectApi.use(function(req, res, next) {
   } else {
 
     // if there is no token
-    // return an error
+    // return a response response to deny the user access
     return res.status(403).send({
         success: false,
         message: 'No token provided.'

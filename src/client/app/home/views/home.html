@@ -11,8 +11,13 @@
       <span>Search By Name</span>
       <input ng-model="name" type="text">
     </div>
-    <div class="four columns">
-      <button type="button" class="btn checkoutbag">Checkout | {{cart}}</button>
+    <div class="four columns cartbtns">
+      <button type="button" class="btn checkoutbag">
+        <strong>Checkout</strong> | Bag:
+        <i ng-show="vm.cartStatus" class="fa fa-shopping-bag" aria-hidden="true"></i>
+        <span ng-show="!vm.cartStatus">Empty!</span>
+      </button>
+      <button ng-click="vm.clearCart()" type="button" class="btn clearbag">Clear Bag</button>
     </div>
   </div>
   <div class="row head">

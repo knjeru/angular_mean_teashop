@@ -10,6 +10,7 @@ h2 {
   color: #FB7F5B;
   text-align: center;
   width: 90%;
+  height: 100px;
   margin: auto;
   margin-bottom: 3rem;
 }
@@ -27,13 +28,22 @@ h2 {
   float: right;
 }
 
-.checkoutbag {
-  background-color: #E26D5F;
+.cartbtns {
   float: right;
+
+  .checkoutbag {
+    background-color: #E26D5F;
+  }
+  .clearbag {
+    background-color: #F5B965;
+  }
 }
 
+
+
+
 .addbag {
-  background-color: #F5B965;
+  background-color: #45d633;
 }
 
 nav {

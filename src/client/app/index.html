@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Angular Shopping Cart</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.7/angular-css.min.js" charset="utf-8"></script>
@@ -13,13 +14,14 @@
   </head>
   <body>
     <header>
-      <nav class="twelve columns navigation">
-        <ul class="main-navigation" role="navigation">
+      <nav class="twelve columns" ng-controller="LoginCtrl as vm">
+        <ul class="main-navigation">
           <li class="two columns"><a ui-sref="home">Home</a></li>
-          <li class="two columns"><a href="#/about">About</a></li>
-          <li class="two columns"><a href="#/contact">Contact</a></li>
-          <li class="two columns"><a ui-sref="login">Sign In</a></li>
-          <li class="two columns"><a class="btn" ui-sref="register">Sign Up Now</a></li>
+          <li class="two columns" ng-show="user"><a ui-sref="profile">User Profile</a></li>
+          <li class="two columns" ng-show="user"><a ui-sref="cart">Cart: <i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+          <li class="two columns" ng-hide="user"><a ui-sref="login">Sign In</a></li>
+          <li class="two columns" ng-click="vm.logout()" ng-show="user"><a>Logout</a></li>
+          <li class="two columns" ng-hide="user"><a class="btn" ui-sref="register">Sign Up Now</a></li>
         </ul>
       </nav>
     </header>

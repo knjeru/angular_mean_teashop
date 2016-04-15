@@ -15,11 +15,20 @@
 
     function LoginCtrl ($rootScope, $location, $localStorage, Auth) {
       function successAuth(res) {
+            $localStorage.val = res.id;
             $localStorage.token = res.token;
-            $location.url(res.id + '/home');
+            $location.url('/');
         }
 
         var vm = this;
+
+        if($localStorage.token) {
+          $rootScope.user = true;
+        } else {
+          $rootScope.user = false;
+        }
+
+        console.log($localStorage.token + ' current user status: ' + $rootScope.user);
 
         vm.login = function () {
           var formData = {

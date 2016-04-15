@@ -32,25 +32,25 @@
           controllerAs: 'vm'
         })
         .state('profile', {
-          url: '/profile/:id',
+          url: '/profile/',
           templateUrl: '/app/userProfile/views/main.html',
-          controller: 'CartCtrl',
+          controller: 'UserCtrl',
           controllerAs: 'vm'
         })
         .state('profileEdit', {
-          url: '/profile/:id/edit',
+          url: '/profile/edit',
           templateUrl: '/app/userProfile/views/edit.html',
-          controller: 'CartCtrl',
+          controller: 'UserCtrl',
           controllerAs: 'vm'
         })
         .state('profile.order', {
-          url: '/profile/:id/orders',
+          url: '/profile/orders',
           templateUrl: '/app/userProfile/views/orders.html',
-          controller: 'CartCtrl',
+          controller: 'UserCtrl',
           controllerAs: 'vm'
         })
         .state('cart', {
-          url: '/:id/checkout',
+          url: '/checkout',
           templateUrl: '/app/checkout/views/cart.html',
           controller: 'CartCtrl',
           controllerAs: 'vm'

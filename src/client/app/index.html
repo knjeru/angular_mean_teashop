@@ -17,6 +17,8 @@
       <nav class="twelve columns" ng-controller="LoginCtrl as vm">
         <ul class="main-navigation">
           <li class="two columns"><a ui-sref="home">Home</a></li>
+          <li class="two columns" ng-show="user"><a ui-sref="profile">User Profile</a></li>
+          <li class="two columns" ng-show="user"><a ui-sref="cart">Cart: <i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
           <li class="two columns" ng-hide="user"><a ui-sref="login">Sign In</a></li>
           <li class="two columns" ng-click="vm.logout()" ng-show="user"><a>Logout</a></li>
           <li class="two columns" ng-hide="user"><a class="btn" ui-sref="register">Sign Up Now</a></li>
